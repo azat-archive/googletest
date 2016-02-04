@@ -3385,7 +3385,8 @@ void XmlUnitTestResultPrinter::PrintXmlUnitTest(std::ostream* stream,
 
   for (int i = 0; i < unit_test.total_test_case_count(); ++i) {
     if (unit_test.GetTestCase(i)->reportable_test_count() > 0)
-      PrintXmlTestCase(stream, *unit_test.GetTestCase(i));
+      if (unit_test.GetTestCase(i)->should_run())
+        PrintXmlTestCase(stream, *unit_test.GetTestCase(i));
   }
   *stream << "</" << kTestsuites << ">\n";
 }
